@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {testServices} from "./services/test.services";
 
 @Component({
   selector: 'app-root',
@@ -11,13 +12,15 @@ export class AppComponent {
   scoreJ1: number = 0;
   scoreJ2: number = 0;
 
-  constructor() {}
+  constructor(private test: testServices) {}
 
   ngOnInit() {
   }
 
 
   onClick($event: MouseEvent) {
-
+    this.test.test().subscribe((value => {
+      console.log(value);
+    }));
   }
 }
