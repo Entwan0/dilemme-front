@@ -7,18 +7,20 @@ import {environment} from "../../environments/environment";
   providedIn: 'root',
 })
 export class gameService {
+  path:string = "http://localhost:5000/"
+
   constructor(private http: HttpClient) {
   }
 
   follow(): Observable<number> {
-    return this.http.post<number>(environment.api.url + 'play',"follow");
+    return this.http.post<number>(this.path + 'play',"follow");
   }
 
   betray(): Observable<number> {
-    return this.http.post<number>(environment.api.url + 'play',"betray");
+    return this.http.post<number>(this.path + 'play',"betray");
   }
 
   surrend(): Observable<number> {
-    return this.http.post<number>(environment.api.url + 'play',"ff");
+    return this.http.post<number>(this.path + 'play',"ff");
   }
 }

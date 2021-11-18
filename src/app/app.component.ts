@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import {testServices} from "./services/test.services";
 import {gameService} from "./services/game.service";
 
 @Component({
@@ -13,16 +12,9 @@ export class AppComponent {
   scoreJ1: number = 0;
   scoreJ2: number = 0;
 
-  constructor(private test: testServices,private gameService: gameService ) {}
+  constructor(private gameService: gameService ) {}
 
   ngOnInit() {
-  }
-
-
-  onClick($event: MouseEvent) {
-    this.test.test().subscribe((value => {
-      console.log(value);
-    }));
   }
 
   follow($event: MouseEvent){
