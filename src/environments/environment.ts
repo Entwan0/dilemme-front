@@ -4,7 +4,7 @@
 
 export const environment = {
   production: true,
-  api: { url: 'https://intense-escarpment-15728.herokuapp.com/' },
+  api: { url: 'http://localhost:5000/' },
 };
 
 /*

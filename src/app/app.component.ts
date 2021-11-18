@@ -25,9 +25,16 @@ export class AppComponent {
     }));
   }
 
-  surrend($event: MouseEvent){
-    this.gameService.surrend().subscribe((value => {
-      console.log(value);
-    }))
+  follow($event: MouseEvent){
+    this.gameService.follow().subscribe();
   }
+
+  betray($event: MouseEvent){
+    this.gameService.betray().subscribe()
+  }
+
+  surrend($event: MouseEvent){
+    this.gameService.surrend().subscribe()
+  }
+
 }
