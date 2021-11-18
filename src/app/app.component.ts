@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {testServices} from "./services/test.services";
+import {gameService} from "./services/game.service";
 
 @Component({
   selector: 'app-root',
@@ -12,7 +13,7 @@ export class AppComponent {
   scoreJ1: number = 0;
   scoreJ2: number = 0;
 
-  constructor(private test: testServices) {}
+  constructor(private test: testServices,private gameService: gameService ) {}
 
   ngOnInit() {
   }
@@ -22,5 +23,11 @@ export class AppComponent {
     this.test.test().subscribe((value => {
       console.log(value);
     }));
+  }
+
+  surrend($event: MouseEvent){
+    this.gameService.surrend().subscribe((value => {
+      console.log(value);
+    }))
   }
 }
