@@ -3,8 +3,8 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: true,
   api: { url: 'https://intense-escarpment-15728.herokuapp.com/' },
+  production: true,
 };
 
 /*
