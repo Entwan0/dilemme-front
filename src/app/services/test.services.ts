@@ -7,10 +7,12 @@ import {environment} from "../../environments/environment";
   providedIn: 'root',
 })
 export class testServices {
+  apiroot: string = "https://intense-escarpment-15728.herokuapp.com/";
   constructor(private http: HttpClient) {
   }
 
-  test(): Observable<string> {
-    return this.http.get<string>(environment.api.url + 'test');
+  test(): Observable<any> {
+    // @ts-ignore
+    return this.http.get<any>(this.apiroot + 'test');
   }
 }
