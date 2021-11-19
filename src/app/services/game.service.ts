@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root',
@@ -12,16 +11,16 @@ export class gameService {
   constructor(private http: HttpClient) {
   }
 
-  follow(): Observable<number> {
-    return this.http.post<number>(this.path + 'play',"follow");
+  follow(): Observable<string> {
+    return this.http.post(this.path + 'play',"follow" ,{ responseType: 'text' });
   }
 
-  betray(): Observable<number> {
-    return this.http.post<number>(this.path + 'play',"betray");
+  betray(): Observable<string> {
+    return this.http.post(this.path + 'play',"betray" ,{ responseType: 'text' });
   }
 
-  surrend(): Observable<number> {
-    return this.http.post<number>(this.path + 'play',"ff");
+  surrend(): Observable<string> {
+    return this.http.post(this.path + 'play',"ff" ,{ responseType: 'text' });
   }
 
   leave(player:number): Observable<number>{
@@ -30,5 +29,9 @@ export class gameService {
 
   getPlayer(): Observable<number>{
     return this.http.get<number>(this.path + 'player');
+  }
+
+  wait(player:number): Observable<boolean>{
+    return this.http.post<boolean>(this.path + 'waitOtherPLayer',player);
   }
 }
