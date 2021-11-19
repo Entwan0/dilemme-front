@@ -16,10 +16,22 @@
     </h2>
   </div>
 
+  <div class="title">
+    <h2> vous etes le joueur
+      <a tuiTag
+         target="_blank"
+         [value]="player.toString()">
+      </a>
+    </h2>
+  </div>
+
   <div class="container">
     <div>
       <h2>
         score J1
+        <a *ngIf="player===1">
+          (vous)
+        </a>
         <br>
         {{scoreJ1}}
       </h2>
@@ -27,8 +39,12 @@
     <div>
       <h2>
         score J2
+        <a *ngIf="player===2">
+          (vous)
+        </a>
         <br>
         {{scoreJ2}}
+
       </h2>
     </div>
   </div>
@@ -40,6 +56,7 @@
         tuiButton
         type="button"
         class="tui-space_right-3 tui-space_bottom-3"
+        [disabled]="(player===2 && turn === 'joueur 1') || (player===1 && turn === 'joueur 2')"
         (click)="follow($event)"
       >
         Suivre
@@ -51,6 +68,7 @@
         tuiButton
         type="button"
         class="tui-space_right-3 tui-space_bottom-3"
+        [disabled]="(player===2 && turn === 'joueur 1') || (player===1 && turn === 'joueur 2')"
         (click)="betray($event)"
       >
         Trahir
@@ -62,6 +80,7 @@
         tuiButton
         type="button"
         class="tui-space_right-3 tui-space_bottom-3"
+        [disabled]="(player===2 && turn === 'joueur 1') || (player===1 && turn === 'joueur 2')"
         (click)="surrend($event)"
       >
         Abandonner

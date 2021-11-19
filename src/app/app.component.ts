@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, HostListener} from '@angular/core';
 import {gameService} from "./services/game.service";
 
 @Component({
@@ -7,14 +7,20 @@ import {gameService} from "./services/game.service";
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  turn: string = "Joueur1";
+  player: number = 0
+  turn: string ="joueur 1";
   nbTurn: number = 0;
   scoreJ1: number = 0;
   scoreJ2: number = 0;
 
-  constructor(private gameService: gameService ) {}
+  constructor(private gameService: gameService ) {
+    this.gameService.getPlayer().subscribe((player) => {
+      this.player = player;
+    });
+  }
 
   ngOnInit() {
+
   }
 
   follow($event: MouseEvent){
@@ -29,4 +35,12 @@ export class AppComponent {
     this.gameService.surrend().subscribe()
   }
 
+  wait(){
+    
+  }
+
+  @HostListener('window:beforeunload', [ '$event' ])
+  beforeUnloadHandler(event:any) {
+    this.gameService.leave(this.player).subscribe()
+  }
 }

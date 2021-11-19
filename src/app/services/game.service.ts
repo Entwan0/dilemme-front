@@ -23,4 +23,12 @@ export class gameService {
   surrend(): Observable<number> {
     return this.http.post<number>(this.path + 'play',"ff");
   }
+
+  leave(player:number): Observable<number>{
+    return this.http.post<number>(this.path + 'leave',player);
+  }
+
+  getPlayer(): Observable<number>{
+    return this.http.get<number>(this.path + 'player');
+  }
 }
