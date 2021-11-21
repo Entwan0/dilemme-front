@@ -91,7 +91,6 @@ export class AppComponent {
     this.gameService.restart().subscribe((value => {
       window.location.reload();
     }));
-
   }
 
   @HostListener('window:beforeunload', ['$event'])
