@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -33,5 +33,13 @@ export class gameService {
 
   wait(player:number): Observable<boolean>{
     return this.http.post<boolean>(this.path + 'waitOtherPLayer',player);
+  }
+
+  createRound():Observable<any>{
+    return this.http.get<number>(this.path + 'round');
+  }
+
+  updatePoints():Observable<String>{
+    return this.http.post(this.path + 'updatePoints',"t" ,{ responseType: 'text' });
   }
 }

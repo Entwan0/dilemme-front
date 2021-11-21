@@ -14,13 +14,12 @@ export class AppComponent {
   scoreJ2: number = 0;
 
   constructor(private gameService: gameService ) {
-    this.gameService.getPlayer().subscribe((player) => {
-      this.player = player;
-      console.log(this.player)
-      if(this.player == 2){
-        this.waitOtherPLayer()
-      }
-    });
+      this.gameService.getPlayer().subscribe((player) => {
+        this.player = player;
+        if(this.player == 2){
+          this.waitOtherPLayer()
+        }
+      });
   }
 
   ngOnInit()  {
@@ -28,16 +27,26 @@ export class AppComponent {
   }
 
   follow($event: MouseEvent){
-    this.gameService.follow().subscribe((value => {
-      console.log(this.turn);
+    this.gameService.follow().subscribe((t => {
+      this.gameService.updatePoints().subscribe((value) => {
+        let splitted = value.split(",",2);
+        this.scoreJ1 = Number(splitted[0]);
+        this.scoreJ2 = Number(splitted[1]);
+        console.log(splitted[0]);
+      })
       this.changeJoueur();
-      console.log(this.turn);
       this.waitOtherPLayer();
     }));
   }
 
   betray($event: MouseEvent){
-    this.gameService.betray().subscribe((value => {
+    this.gameService.betray().subscribe((t => {
+      this.gameService.updatePoints().subscribe((value) => {
+        let splitted = value.split(",",2);
+        this.scoreJ1 = Number(splitted[0]);
+        this.scoreJ2 = Number(splitted[1]);
+        console.log(splitted[0]);
+      })
       this.changeJoueur();
       this.waitOtherPLayer();
     }));
@@ -53,12 +62,17 @@ export class AppComponent {
   waitOtherPLayer(){
     console.log("wait");
     this.gameService.wait(this.player).subscribe((async value => {
-      console.log(value);
       if (value === false) {
         await this.sleep(1000);
         this.waitOtherPLayer();
       }else{
-        this.changeJoueur();
+        this.gameService.updatePoints().subscribe((value) => {
+          let splitted = value.split(",",2);
+          this.scoreJ1 = Number(splitted[0]);
+          this.scoreJ2 = Number(splitted[1]);
+          console.log(splitted[0]);
+          this.changeJoueur();
+        })
       }
     }));
   }
@@ -77,4 +91,6 @@ export class AppComponent {
   beforeUnloadHandler(event:any) {
     this.gameService.leave(this.player).subscribe()
   }
+
+
 }
