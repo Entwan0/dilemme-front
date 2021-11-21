@@ -87,9 +87,10 @@ export class AppComponent {
     if(this.turn == "joueur 1")this.turn = "joueur 2";
     else this.turn = "joueur 1";
   }
+
   @HostListener('window:beforeunload', [ '$event' ])
   beforeUnloadHandler(event:any) {
-    this.gameService.leave(this.player).subscribe()
+    this.gameService.leave(this.player).subscribe();
   }
 
 
