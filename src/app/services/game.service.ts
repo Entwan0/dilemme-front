@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class gameService {
-  path:string = "https://intense-escarpment-15728.herokuapp.com/"
+  path:string = "http://localhost:5000/"
 
   constructor(private http: HttpClient) {
   }
@@ -29,6 +29,10 @@ export class gameService {
 
   getPlayer(): Observable<number>{
     return this.http.get<number>(this.path + 'player');
+  }
+
+  restart(): Observable<string> {
+    return this.http.post(this.path + 'restart',"ff" ,{ responseType: 'text' });
   }
 
   wait(player:number): Observable<boolean>{

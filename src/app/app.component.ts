@@ -7,23 +7,23 @@ import {gameService} from "./services/game.service";
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  player: number = 0
+  player: number = 0;
   turn: string ="joueur 1";
   nbTurn: number = 0;
   scoreJ1: number = 0;
   scoreJ2: number = 0;
 
   constructor(private gameService: gameService ) {
-      this.gameService.getPlayer().subscribe((player) => {
-        this.player = player;
-        if(this.player == 2){
-          this.waitOtherPLayer()
-        }
-      });
+
   }
 
   ngOnInit()  {
-
+    this.gameService.getPlayer().subscribe((player) => {
+      this.player = player;
+      if(this.player == 2){
+        this.waitOtherPLayer()
+      }
+    });
   }
 
   follow($event: MouseEvent){
@@ -60,7 +60,6 @@ export class AppComponent {
   }
 
   waitOtherPLayer(){
-    console.log("wait");
     this.gameService.wait(this.player).subscribe((async value => {
       if (value === false) {
         await this.sleep(1000);
@@ -88,10 +87,15 @@ export class AppComponent {
     else this.turn = "joueur 1";
   }
 
-  @HostListener('window:beforeunload', [ '$event' ])
-  beforeUnloadHandler(event:any) {
-    this.gameService.leave(this.player).subscribe();
+  restart(){
+    this.gameService.restart().subscribe((value => {
+      window.location.reload();
+    }));
+
   }
 
-
+  @HostListener('window:beforeunload', ['$event'])
+  public async  saveAndClosePromt($event: any) {
+    this.gameService.leave(this.player).subscribe();
+  }
 }
