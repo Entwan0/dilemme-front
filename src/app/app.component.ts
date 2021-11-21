@@ -89,6 +89,8 @@ export class AppComponent {
 
   restart(){
     this.gameService.restart().subscribe((value => {
+      this.scoreJ1 = 0;
+      this.scoreJ2 = 0;
       window.location.reload();
     }));
   }
