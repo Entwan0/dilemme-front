@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class gameService {
-  path:string = "http://localhost:5000/"
+  path:string = "https://intense-escarpment-15728.herokuapp.com/"
 
   constructor(private http: HttpClient) {
   }
