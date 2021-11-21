@@ -62,7 +62,7 @@ export class AppComponent {
   waitOtherPLayer(){
     this.gameService.wait(this.player).subscribe((async value => {
       if (value === false) {
-        await this.sleep(1000);
+        await this.sleep(100);
         this.waitOtherPLayer();
       }else{
         this.gameService.updatePoints().subscribe((value) => {
